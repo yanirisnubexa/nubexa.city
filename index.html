@@ -3,161 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="NUBEXA — Tu Ciudad Digital. La plataforma donde los negocios locales crecen y los clientes descubren servicios increibles.">
 <title>NUBEXA — Tu Ciudad Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;500;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#04060f;
-  --bg2:#070b1a;
-  --accent:#00f0ff;
-  --a2:#7b2fff;
-  --a3:#ff3e8a;
-  --gold:#ffd166;
-  --green:#00ff9d;
-  --text:#e8eeff;
-  --muted:#6a7aaa;
-  --dim:#2a3a5a;
+  --bg:#04060f;--bg2:#070b1a;
+  --accent:#00f0ff;--a2:#7b2fff;
+  --gold:#ffd166;--green:#00ff9d;
+  --text:#e8eeff;--muted:#6a7aaa;--dim:#2a3a5a;
+  --border:rgba(0,240,255,0.12);
   --card:rgba(255,255,255,0.03);
-  --border:rgba(0,240,255,0.1);
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,240,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.02) 1px,transparent 1px);background-size:55px 55px;pointer-events:none;z-index:0;}
-.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;gap:1rem;padding:.75rem 2rem;background:rgba(4,6,15,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);}
-.logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1rem;letter-spacing:3px;background:linear-gradient(90deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;border:none;background-color:transparent;}
-.nav-links{display:flex;gap:1.5rem;list-style:none;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:1px;transition:color .2s;cursor:pointer;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;gap:1rem;padding:.7rem 2rem;background:rgba(4,6,15,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);}
+.logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:.95rem;letter-spacing:3px;background:linear-gradient(90deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;border:none;background-color:transparent;cursor:pointer;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;margin-left:.5rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:1px;cursor:pointer;}
 .nav-links a:hover{color:var(--accent);}
-.nav-right{display:flex;gap:.6rem;margin-left:auto;align-items:center;}
-.nav-btn{padding:.42rem 1rem;border-radius:3px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.nav-right{margin-left:auto;display:flex;gap:.6rem;}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.4rem 1rem;border-radius:3px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
-.btn-biz{background:linear-gradient(135deg,var(--a2),var(--accent));color:#000;font-weight:700;border:none;}
-.btn-biz:hover{opacity:.9;transform:translateY(-1px);}
-.modal-overlay{position:fixed;inset:0;background:rgba(4,6,15,.88);backdrop-filter:blur(14px);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:1rem;}
-.modal-overlay.active{opacity:1;pointer-events:all;}
-.modal{background:var(--bg2);border:1px solid var(--border);border-radius:10px;width:100%;max-width:480px;max-height:92vh;overflow:hidden;transform:translateY(24px) scale(.97);transition:transform .38s cubic-bezier(.175,.885,.32,1.275);position:relative;display:flex;flex-direction:column;}
-.modal-overlay.active .modal{transform:translateY(0) scale(1);}
-.modal.wide{max-width:620px;}
-.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem 1rem;border-bottom:1px solid var(--border);flex-shrink:0;}
-.modal-title{font-family:'Orbitron',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:1.5px;}
-.modal-close{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;}
-.modal-close:hover{background:rgba(255,255,255,.06);color:var(--text);}
-.modal-body{padding:1.4rem;overflow-y:auto;flex:1;}
-.modal-body::-webkit-scrollbar{width:3px;}
-.modal-body::-webkit-scrollbar-thumb{background:rgba(123,47,255,.2);}
-.auth-tabs{display:flex;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:4px;padding:3px;margin-bottom:1.4rem;}
-.auth-tab{flex:1;padding:.42rem;border:none;background:transparent;color:var(--muted);font-family:'Syne Mono',monospace;font-size:.62rem;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:all .25s;}
-.auth-tab.active{background:linear-gradient(135deg,var(--a2),var(--accent));color:#000;font-weight:700;}
-.form-group{margin-bottom:.95rem;}
-.form-label{font-family:'Syne Mono',monospace;font-size:.56rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:.3rem;}
-.form-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:.62rem .9rem;font-family:'Syne',sans-serif;font-size:.84rem;color:var(--text);outline:none;transition:all .3s;}
-.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,240,255,.07);}
-.form-input::placeholder{color:var(--dim);}
-.form-hint{font-size:.66rem;color:var(--muted);margin-top:.28rem;line-height:1.5;}
-.btn-submit{width:100%;background:linear-gradient(135deg,var(--a2),var(--accent));border:none;color:#000;padding:.72rem;border-radius:3px;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:.4rem;}
-.btn-submit:hover{opacity:.9;transform:translateY(-1px);}
-.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-.alert{display:flex;gap:.55rem;align-items:flex-start;background:rgba(0,240,255,.05);border:1px solid rgba(0,240,255,.15);border-radius:4px;padding:.72rem;margin-bottom:1rem;font-size:.74rem;color:var(--muted);line-height:1.6;}
-.alert strong{color:var(--text);}
-.alert-green{background:rgba(0,255,157,.05);border-color:rgba(0,255,157,.2);}
-.tally-wrap{position:relative;min-height:400px;border-radius:5px;overflow:hidden;}
-.tally-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;background:var(--bg2);}
-.tl-spinner{width:30px;height:30px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.tl-text{font-family:'Syne Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:2px;}
-.success-state{text-align:center;padding:1.5rem .5rem;}
-.ss-ico{font-size:2.8rem;margin-bottom:.65rem;display:block;animation:pop .5s cubic-bezier(.175,.885,.32,1.275);}
-@keyframes pop{0%{transform:scale(0);}100%{transform:scale(1);}}
-.ss-title{font-family:'Orbitron',sans-serif;font-size:.95rem;font-weight:900;color:var(--green);letter-spacing:1px;margin-bottom:.45rem;}
-.ss-msg{font-size:.8rem;color:var(--muted);line-height:1.8;margin-bottom:1.3rem;}
-.ss-next{background:rgba(0,255,157,.06);border:1px solid rgba(0,255,157,.2);border-radius:5px;padding:.95rem;text-align:left;margin-bottom:1.1rem;}
-.sn-label{font-family:'Syne Mono',monospace;font-size:.5rem;letter-spacing:2px;color:var(--green);margin-bottom:.45rem;}
-.sn-item{font-size:.74rem;color:var(--muted);display:flex;gap:.4rem;margin-bottom:.32rem;}
-.sn-item::before{content:'> ';color:var(--green);flex-shrink:0;}
+.btn-biz{background:linear-gradient(135deg,var(--a2),var(--accent));color:#000;padding:.4rem 1rem;border-radius:3px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;}
+.btn-biz:hover{opacity:.9;}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(4,6,15,.9);backdrop-filter:blur(12px);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem;}
+.overlay.show{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:10px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;position:relative;}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.4rem;border-bottom:1px solid var(--border);}
+.modal-head h2{font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:2px;}
+.btn-close{background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;line-height:1;padding:.2rem .4rem;}
+.btn-close:hover{color:var(--text);}
+.modal-body{padding:1.4rem;}
+
+/* TABS */
+.tabs{display:flex;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:4px;padding:3px;margin-bottom:1.4rem;}
+.tab{flex:1;padding:.42rem;border:none;background:transparent;color:var(--muted);font-family:'Syne Mono',monospace;font-size:.62rem;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:all .2s;}
+.tab.on{background:linear-gradient(135deg,var(--a2),var(--accent));color:#000;font-weight:700;}
+
+/* FORM */
+.field{margin-bottom:.9rem;}
+.field label{font-family:'Syne Mono',monospace;font-size:.55rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:.3rem;}
+.field input,.field select,.field textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:3px;padding:.6rem .85rem;font-family:'Syne',sans-serif;font-size:.84rem;color:var(--text);outline:none;}
+.field input:focus,.field select:focus{border-color:var(--accent);}
+.field input::placeholder{color:var(--dim);}
+.field select{cursor:pointer;}
+.field select option{background:var(--bg2);}
+.btn-submit{width:100%;background:linear-gradient(135deg,var(--a2),var(--accent));border:none;color:#000;padding:.72rem;border-radius:3px;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:.5rem;}
+.btn-submit:hover{opacity:.9;}
+.hint{font-size:.68rem;color:var(--muted);margin-top:.25rem;}
+.link-text{color:var(--accent);cursor:pointer;text-decoration:none;}
+.center-sm{text-align:center;font-size:.72rem;color:var(--muted);margin-top:.85rem;}
+.alert-box{display:flex;gap:.5rem;background:rgba(0,255,157,.06);border:1px solid rgba(0,255,157,.2);border-radius:4px;padding:.7rem;margin-bottom:1rem;font-size:.74rem;color:var(--muted);line-height:1.6;}
+.alert-box strong{color:var(--text);}
+
+/* SUCCESS */
+.success-box{text-align:center;padding:1.5rem 0;}
+.success-box .ico{font-size:2.8rem;display:block;margin-bottom:.65rem;}
+.success-box h3{font-family:'Orbitron',sans-serif;font-size:.9rem;color:var(--green);font-weight:700;margin-bottom:.45rem;letter-spacing:1px;}
+.success-box p{font-size:.8rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem;}
+.next-steps{background:rgba(0,255,157,.05);border:1px solid rgba(0,255,157,.18);border-radius:5px;padding:.9rem;text-align:left;margin-bottom:1rem;}
+.next-steps .ns-lbl{font-family:'Syne Mono',monospace;font-size:.5rem;letter-spacing:2px;color:var(--green);margin-bottom:.45rem;}
+.next-steps .ns-item{font-size:.74rem;color:var(--muted);display:flex;gap:.4rem;margin-bottom:.3rem;}
+.next-steps .ns-item::before{content:'>';color:var(--green);flex-shrink:0;}
+
+/* HERO */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden;}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
-.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(123,47,255,.28),transparent 70%);top:-200px;left:-150px;animation:of 8s ease-in-out infinite;}
-.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(0,240,255,.18),transparent 70%);bottom:-100px;right:-100px;animation:of 10s ease-in-out infinite reverse;}
-.o3{width:300px;height:300px;background:radial-gradient(circle,rgba(255,62,138,.15),transparent 70%);top:40%;left:50%;transform:translate(-50%,-50%);animation:of 6s ease-in-out infinite 2s;}
-@keyframes of{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
-.hero-pill{display:inline-flex;align-items:center;gap:.5rem;font-family:'Syne Mono',monospace;font-size:.65rem;letter-spacing:3px;color:var(--accent);border:1px solid rgba(0,240,255,.2);padding:.3rem 1rem;border-radius:100px;background:rgba(0,240,255,.05);margin-bottom:1.5rem;animation:fu .8s ease forwards;opacity:0;}
-.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(3rem,10vw,7rem);font-weight:900;line-height:1;letter-spacing:-2px;background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--a2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fu .8s ease .15s forwards;opacity:0;margin-bottom:.4rem;}
-.hero-tag{font-family:'Orbitron',sans-serif;font-size:clamp(.7rem,2vw,1rem);letter-spacing:8px;color:var(--muted);text-transform:uppercase;animation:fu .8s ease .3s forwards;opacity:0;margin-bottom:1.5rem;}
-.hero p{font-size:clamp(.9rem,2vw,1.15rem);color:var(--muted);max-width:580px;line-height:1.8;animation:fu .8s ease .45s forwards;opacity:0;margin-bottom:2.5rem;}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fu .8s ease .6s forwards;opacity:0;}
+.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(123,47,255,.28),transparent 70%);top:-200px;left:-150px;animation:pulse 8s ease-in-out infinite;}
+.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(0,240,255,.18),transparent 70%);bottom:-100px;right:-100px;animation:pulse 10s ease-in-out infinite reverse;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+.pill{display:inline-flex;align-items:center;gap:.5rem;font-family:'Syne Mono',monospace;font-size:.62rem;letter-spacing:3px;color:var(--accent);border:1px solid rgba(0,240,255,.2);padding:.3rem 1rem;border-radius:100px;background:rgba(0,240,255,.05);margin-bottom:1.5rem;}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(3rem,10vw,7rem);font-weight:900;line-height:1;letter-spacing:-2px;background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--a2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.4rem;}
+.hero-sub{font-family:'Orbitron',sans-serif;font-size:clamp(.7rem,2vw,1rem);letter-spacing:8px;color:var(--muted);text-transform:uppercase;margin-bottom:1.5rem;}
+.hero p{font-size:clamp(.9rem,2vw,1.1rem);color:var(--muted);max-width:560px;line-height:1.8;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
 .btn-lg{padding:.9rem 2.2rem;border-radius:3px;font-family:'Syne',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;border:none;}
 .btn-primary{background:linear-gradient(135deg,var(--a2),var(--accent));color:#000;}
 .btn-primary:hover{opacity:.9;transform:translateY(-2px);}
 .btn-outline{background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--text);}
-.btn-outline:hover{border-color:var(--accent);background:rgba(0,240,255,.05);}
-@keyframes fu{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
-.skyline-wrap{position:relative;z-index:1;width:100%;overflow:hidden;margin-top:-3rem;}
-.skyline-wrap svg{width:100%;height:auto;display:block;}
-.stats{position:relative;z-index:1;display:flex;justify-content:center;gap:4rem;padding:3rem 2rem;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.btn-outline:hover{border-color:var(--accent);}
+
+/* SKYLINE */
+.skyline{position:relative;z-index:1;width:100%;overflow:hidden;margin-top:-3rem;}
+.skyline svg{width:100%;height:auto;display:block;}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:4rem;padding:3rem 2rem;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
 .stat{text-align:center;}
-.stat-num{font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.stat-lbl{font-family:'Syne Mono',monospace;font-size:.62rem;letter-spacing:3px;color:var(--muted);margin-top:.25rem;}
-.section{position:relative;z-index:1;padding:7rem 2rem;max-width:1100px;margin:0 auto;}
-.section-label{font-family:'Syne Mono',monospace;font-size:.65rem;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:.75rem;}
-.section-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:1rem;}
-.section-sub{color:var(--muted);font-size:.95rem;line-height:1.8;max-width:540px;margin-bottom:3rem;}
-.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
-.step-card{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:1.5rem;position:relative;overflow:hidden;transition:all .3s;}
-.step-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a2),var(--accent));transform:scaleX(0);transition:transform .4s;transform-origin:left;}
-.step-card:hover{transform:translateY(-4px);border-color:rgba(0,240,255,.2);}
-.step-card:hover::before{transform:scaleX(1);}
-.step-num{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:rgba(0,240,255,.08);position:absolute;top:.75rem;right:.85rem;}
-.step-ico{font-size:2rem;margin-bottom:.9rem;}
-.step-title{font-family:'Orbitron',sans-serif;font-size:.8rem;letter-spacing:.5px;margin-bottom:.6rem;}
-.step-body{font-size:.8rem;color:var(--muted);line-height:1.7;}
-.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;}
+.stat-n{font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-l{font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:3px;color:var(--muted);margin-top:.25rem;}
+
+/* SECTIONS */
+.sec{position:relative;padding:6rem 2rem;max-width:1100px;margin:0 auto;}
+.sec-lbl{font-family:'Syne Mono',monospace;font-size:.62rem;letter-spacing:4px;color:var(--accent);text-transform:uppercase;margin-bottom:.7rem;}
+.sec-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:1rem;}
+.sec-sub{color:var(--muted);font-size:.92rem;line-height:1.8;max-width:520px;margin-bottom:3rem;}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:1.5rem;position:relative;overflow:hidden;transition:all .3s;}
+.card:hover{transform:translateY(-4px);border-color:rgba(0,240,255,.2);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a2),var(--accent));transform:scaleX(0);transition:transform .4s;transform-origin:left;}
+.card:hover::before{transform:scaleX(1);}
+.card-num{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:rgba(0,240,255,.07);position:absolute;top:.75rem;right:.85rem;}
+.card-ico{font-size:2rem;margin-bottom:.9rem;}
+.card-title{font-family:'Orbitron',sans-serif;font-size:.78rem;letter-spacing:.5px;margin-bottom:.6rem;}
+.card-body{font-size:.8rem;color:var(--muted);line-height:1.7;}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;}
 .feat-list{display:flex;flex-direction:column;gap:1rem;}
-.feat-item{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem;background:var(--card);border:1px solid var(--border);border-radius:5px;transition:all .25s;}
-.feat-item:hover{border-color:rgba(123,47,255,.3);}
+.feat{display:flex;gap:1rem;align-items:flex-start;padding:1.1rem;background:var(--card);border:1px solid var(--border);border-radius:5px;transition:all .25s;}
+.feat:hover{border-color:rgba(123,47,255,.3);}
 .feat-ico{width:44px;height:44px;border-radius:4px;background:rgba(0,240,255,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
-.feat-title{font-family:'Orbitron',sans-serif;font-size:.72rem;letter-spacing:.5px;margin-bottom:.3rem;}
-.feat-body{font-size:.77rem;color:var(--muted);line-height:1.6;}
-.phone-mock{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.2rem;max-width:300px;margin:0 auto;}
-.pm-bar{display:flex;gap:.35rem;margin-bottom:.85rem;}
-.pm-dot{width:9px;height:9px;border-radius:50%;}
-.pm-search{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:.5rem .85rem;font-family:'Syne Mono',monospace;font-size:.65rem;color:var(--accent);margin-bottom:.65rem;}
-.pm-cats{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.65rem;}
-.pm-cat{font-family:'Syne Mono',monospace;font-size:.55rem;padding:.2rem .5rem;border-radius:100px;border:1px solid var(--border);color:var(--muted);}
-.pm-cat.active{border-color:var(--accent);color:var(--accent);background:rgba(0,240,255,.08);}
-.pm-card{display:flex;gap:.6rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:4px;padding:.65rem;margin-bottom:.4rem;}
-.pm-card-name{font-family:'Orbitron',sans-serif;font-size:.58rem;letter-spacing:.5px;margin-bottom:.1rem;}
-.pm-card-meta{font-size:.55rem;color:var(--muted);}
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;}
-.price-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:2rem;position:relative;overflow:hidden;transition:all .3s;}
-.price-card:hover{transform:translateY(-4px);}
-.price-card.featured{border-color:var(--a2);background:rgba(123,47,255,.07);}
-.price-card.featured::before{content:'MAS POPULAR';position:absolute;top:1.2rem;right:-2.5rem;background:linear-gradient(135deg,var(--a2),var(--accent));color:#000;font-size:.5rem;font-weight:700;letter-spacing:2px;padding:.3rem 3rem;transform:rotate(45deg);}
-.price-tier{font-family:'Syne Mono',monospace;font-size:.62rem;letter-spacing:3px;color:var(--accent);margin-bottom:.75rem;}
-.price-amount{font-family:'Orbitron',sans-serif;font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.25rem;}
-.price-period{font-size:.72rem;color:var(--muted);letter-spacing:2px;margin-bottom:1.5rem;}
-.price-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;}
-.price-features li{font-size:.78rem;color:var(--muted);display:flex;gap:.5rem;}
-.price-features li::before{content:'> ';color:var(--accent);}
-.price-btn{display:block;text-align:center;padding:.8rem;border-radius:3px;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--text);width:100%;}
-.price-card.featured .price-btn{background:linear-gradient(135deg,var(--a2),var(--accent));border:none;color:#000;}
-.price-btn:hover{border-color:var(--accent);color:var(--accent);}
-.price-card.featured .price-btn:hover{opacity:.9;}
-.cta-section{position:relative;z-index:1;text-align:center;padding:8rem 2rem;overflow:hidden;}
-.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,47,255,.2),transparent 60%);pointer-events:none;}
-.cta-section h2{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,5vw,3.5rem);font-weight:900;margin-bottom:1rem;line-height:1.15;}
-.cta-section p{color:var(--muted);font-size:.95rem;line-height:1.8;max-width:480px;margin:0 auto 2.5rem;}
-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.footer-links{display:flex;gap:1.5rem;list-style:none;}
-.footer-links a{color:var(--muted);text-decoration:none;font-size:.72rem;letter-spacing:1px;transition:color .2s;cursor:pointer;}
-.footer-links a:hover{color:var(--accent);}
-.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(4,6,15,.97);border:1px solid var(--accent);border-radius:3px;padding:.6rem 1.4rem;font-family:'Syne Mono',monospace;font-size:.68rem;color:var(--accent);z-index:9999;transition:transform .3s;backdrop-filter:blur(20px);white-space:nowrap;}
+.feat-title{font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:.5px;margin-bottom:.28rem;}
+.feat-body{font-size:.75rem;color:var(--muted);line-height:1.6;}
+.phone{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.1rem;max-width:280px;margin:0 auto;}
+.phone-bar{display:flex;gap:.3rem;margin-bottom:.8rem;}
+.phone-dot{width:9px;height:9px;border-radius:50%;}
+.phone-search{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:3px;padding:.45rem .8rem;font-family:'Syne Mono',monospace;font-size:.62rem;color:var(--accent);margin-bottom:.6rem;}
+.phone-cats{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.6rem;}
+.phone-cat{font-family:'Syne Mono',monospace;font-size:.52rem;padding:.18rem .45rem;border-radius:100px;border:1px solid var(--border);color:var(--muted);}
+.phone-cat.on{border-color:var(--accent);color:var(--accent);background:rgba(0,240,255,.08);}
+.phone-item{display:flex;gap:.55rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:4px;padding:.6rem;margin-bottom:.38rem;}
+.phone-name{font-family:'Orbitron',sans-serif;font-size:.56rem;letter-spacing:.5px;margin-bottom:.1rem;}
+.phone-meta{font-size:.53rem;color:var(--muted);}
+
+/* PRICING */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.8rem;position:relative;overflow:hidden;transition:all .3s;}
+.pcard:hover{transform:translateY(-4px);}
+.pcard.featured{border-color:var(--a2);background:rgba(123,47,255,.07);}
+.pcard.featured::after{content:'MAS POPULAR';position:absolute;top:1.2rem;right:-2.5rem;background:linear-gradient(135deg,var(--a2),var(--accent));color:#000;font-size:.48rem;font-weight:700;letter-spacing:2px;padding:.28rem 2.8rem;transform:rotate(45deg);}
+.ptier{font-family:'Syne Mono',monospace;font-size:.6rem;letter-spacing:3px;color:var(--accent);margin-bottom:.7rem;}
+.pprice{font-family:'Orbitron',sans-serif;font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.2rem;}
+.pperiod{font-size:.7rem;color:var(--muted);letter-spacing:2px;margin-bottom:1.4rem;}
+.pfeats{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.8rem;}
+.pfeats li{font-size:.76rem;color:var(--muted);display:flex;gap:.4rem;}
+.pfeats li::before{content:'>';color:var(--accent);}
+.pbtn{display:block;text-align:center;padding:.75rem;border-radius:3px;font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--text);width:100%;}
+.pcard.featured .pbtn{background:linear-gradient(135deg,var(--a2),var(--accent));border:none;color:#000;}
+.pbtn:hover{border-color:var(--accent);color:var(--accent);}
+.pcard.featured .pbtn:hover{opacity:.9;}
+
+/* CTA */
+.cta{position:relative;text-align:center;padding:7rem 2rem;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(123,47,255,.18),transparent 60%);pointer-events:none;}
+.cta h2{font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;margin-bottom:1rem;line-height:1.15;}
+.cta p{color:var(--muted);font-size:.92rem;line-height:1.8;max-width:460px;margin:0 auto 2.5rem;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.flinks{display:flex;gap:1.5rem;list-style:none;}
+.flinks a{color:var(--muted);text-decoration:none;font-size:.7rem;letter-spacing:1px;cursor:pointer;}
+.flinks a:hover{color:var(--accent);}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(4,6,15,.97);border:1px solid var(--accent);border-radius:3px;padding:.6rem 1.4rem;font-family:'Syne Mono',monospace;font-size:.66rem;color:var(--accent);z-index:9999;transition:transform .3s;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
+
 @media(max-width:768px){
   .nav-links{display:none;}
-  .features-grid{grid-template-columns:1fr;}
+  .feat-grid{grid-template-columns:1fr;}
   .stats{gap:2rem;}
   footer{flex-direction:column;text-align:center;}
 }
@@ -165,74 +175,77 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2.
 </head>
 <body>
 
-<nav class="nav">
+<nav>
   <button class="logo" onclick="window.scrollTo(0,0)">NUBEXA</button>
   <ul class="nav-links">
-    <li><a onclick="scrollSec('how')">Como funciona</a></li>
-    <li><a onclick="scrollSec('features')">Funciones</a></li>
-    <li><a onclick="scrollSec('pricing')">Planes</a></li>
+    <li><a onclick="goTo('how')">Como funciona</a></li>
+    <li><a onclick="goTo('features')">Funciones</a></li>
+    <li><a onclick="goTo('pricing')">Planes</a></li>
   </ul>
   <div class="nav-right">
-    <button class="nav-btn btn-ghost" onclick="openModal('client')">Explorar ciudad</button>
-    <button class="nav-btn btn-biz" onclick="openModal('biz')">Acceso negocio</button>
+    <button class="btn-ghost" onclick="showModal('client','login')">Explorar ciudad</button>
+    <button class="btn-biz" onclick="showModal('biz','login')">Acceso negocio</button>
   </div>
 </nav>
 
-<div class="modal-overlay" id="modalBiz" onclick="handleOverlay(event,'modalBiz')">
-  <div class="modal wide">
-    <div class="modal-hdr">
-      <div class="modal-title" id="bizTitle">ACCESO NEGOCIO</div>
-      <button class="modal-close" onclick="closeModal('modalBiz')">X</button>
+<!-- MODAL NEGOCIO -->
+<div class="overlay" id="ovBiz" onclick="closeIfBg(event,'ovBiz')">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="bizTitle">ACCESO NEGOCIO</h2>
+      <button class="btn-close" onclick="closeModal('ovBiz')">&#x2715;</button>
     </div>
-    <div class="modal-body" id="bizBody">
-      <div class="auth-tabs">
-        <button class="auth-tab active" id="tabL" onclick="bizTab('login')">Iniciar sesion</button>
-        <button class="auth-tab" id="tabR" onclick="bizTab('register')">Crear cuenta gratis</button>
+    <div class="modal-body">
+      <div class="tabs">
+        <button class="tab on" id="tLogin" onclick="bizTab('login')">Iniciar sesion</button>
+        <button class="tab" id="tReg" onclick="bizTab('register')">Crear cuenta gratis</button>
       </div>
-      <div id="pLogin">
-        <div class="alert">
-          <span>Info:</span>
-          <div><strong>Acceso directo:</strong> Ingresa tu email y te redirigimos a tu dashboard de negocio.</div>
+
+      <!-- LOGIN -->
+      <div id="panelLogin">
+        <div style="display:flex;gap:.5rem;background:rgba(0,240,255,.05);border:1px solid rgba(0,240,255,.15);border-radius:4px;padding:.7rem;margin-bottom:1rem;font-size:.74rem;color:var(--muted);line-height:1.6;">
+          <span>💡</span>
+          <div><strong style="color:var(--text);">Acceso directo:</strong> Ingresa tu email y te redirigimos a tu dashboard.</div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email de tu negocio</label>
-          <input class="form-input" id="loginEmail" type="email" placeholder="hola@tunegocio.com" onkeydown="if(event.key==='Enter')doLogin()">
-          <div class="form-hint">El mismo email con que te registraste en NUBEXA</div>
+        <div class="field">
+          <label>Email de tu negocio</label>
+          <input type="email" id="loginEmail" placeholder="hola@tunegocio.com">
+          <div class="hint">El mismo email con que te registraste en NUBEXA</div>
         </div>
         <button class="btn-submit" id="loginBtn" onclick="doLogin()">Entrar a mi negocio</button>
-        <div style="text-align:center;margin-top:.85rem;font-size:.72rem;color:var(--muted);">
-          No tienes cuenta? <a onclick="bizTab('register')" style="color:var(--accent);cursor:pointer;">Registrate gratis</a>
-        </div>
+        <div class="center-sm">No tienes cuenta? <span class="link-text" onclick="bizTab('register')">Registrate gratis</span></div>
       </div>
-      <div id="pRegister" style="display:none;">
-        <div class="alert alert-green">
-          <span>Oferta:</span>
+
+      <!-- REGISTRO -->
+      <div id="panelReg" style="display:none;">
+        <div class="alert-box">
+          <span>🎁</span>
           <div><strong>Primer mes 100% gratis</strong> para negocios fundadores. Completa el formulario y en 24h configuramos tu perfil.</div>
         </div>
-        <div id="nubexaForm">
-          <div class="form-group">
-            <label class="form-label">Nombre del negocio</label>
-            <input class="form-input" id="reg_biz" type="text" placeholder="Ej: Salon Glamour, Cafe Nube...">
+        <div id="regForm">
+          <div class="field">
+            <label>Nombre del negocio *</label>
+            <input type="text" id="rBiz" placeholder="Ej: Salon Glamour, Cafe Nube...">
           </div>
-          <div class="form-group">
-            <label class="form-label">Tu nombre (dueno o encargado)</label>
-            <input class="form-input" id="reg_name" type="text" placeholder="Tu nombre completo">
+          <div class="field">
+            <label>Tu nombre (dueno o encargado) *</label>
+            <input type="text" id="rName" placeholder="Tu nombre completo">
           </div>
-          <div class="form-group">
-            <label class="form-label">Email de contacto</label>
-            <input class="form-input" id="reg_email" type="email" placeholder="tu@email.com">
+          <div class="field">
+            <label>Email de contacto *</label>
+            <input type="email" id="rEmail" placeholder="tu@email.com">
           </div>
-          <div class="form-group">
-            <label class="form-label">WhatsApp / Telefono</label>
-            <input class="form-input" id="reg_phone" type="tel" placeholder="+1 555 0000">
+          <div class="field">
+            <label>WhatsApp / Telefono</label>
+            <input type="tel" id="rPhone" placeholder="+1 555 0000">
           </div>
-          <div class="form-group">
-            <label class="form-label">Ciudad</label>
-            <input class="form-input" id="reg_city" type="text" placeholder="Tu ciudad">
+          <div class="field">
+            <label>Ciudad *</label>
+            <input type="text" id="rCity" placeholder="Tu ciudad">
           </div>
-          <div class="form-group">
-            <label class="form-label">Categoria del negocio</label>
-            <select class="form-input" id="reg_cat" style="cursor:pointer;">
+          <div class="field">
+            <label>Categoria del negocio</label>
+            <select id="rCat">
               <option value="">Selecciona una categoria</option>
               <option>Salon / Spa / Barberia</option>
               <option>Cafeteria / Restaurante</option>
@@ -246,89 +259,79 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2.
               <option>Otro</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">Describe tu negocio en una linea</label>
-            <input class="form-input" id="reg_desc" type="text" placeholder="Ej: El mejor salon de belleza del norte de la ciudad">
+          <div class="field">
+            <label>Describe tu negocio en una linea</label>
+            <input type="text" id="rDesc" placeholder="Ej: El mejor salon de belleza del norte">
           </div>
-          <button class="btn-submit" onclick="submitRegister()">Registrar mi negocio gratis</button>
+          <button class="btn-submit" onclick="doRegister()">Registrar mi negocio gratis</button>
         </div>
-
-        <div id="regSuccess" style="display:none;text-align:center;padding:2rem 0;">
-          <div style="font-size:2.5rem;margin-bottom:.75rem;">🎉</div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:.9rem;color:var(--green);font-weight:700;margin-bottom:.5rem;">REGISTRO EXITOSO</div>
-          <div style="font-size:.8rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem;">Tu negocio fue registrado. En menos de 24 horas te contactamos por WhatsApp para configurar tu perfil en el mapa.</div>
-          <button class="btn-submit" onclick="closeAllModals()">Cerrar</button>
+        <div id="regOk" style="display:none;">
+          <div class="success-box">
+            <span class="ico">🎉</span>
+            <h3>REGISTRO EXITOSO</h3>
+            <p>Tu negocio fue registrado. En menos de 24 horas te contactamos por WhatsApp para configurar tu perfil en el mapa.</p>
+            <div class="next-steps">
+              <div class="ns-lbl">PROXIMOS PASOS</div>
+              <div class="ns-item">Revisa tu email — te enviamos confirmacion</div>
+              <div class="ns-item">Prepara 2-3 fotos de tu negocio</div>
+              <div class="ns-item">En 24h tu perfil estara activo en el mapa</div>
+            </div>
+            <button class="btn-submit" onclick="closeModal('ovBiz')">Cerrar</button>
+          </div>
         </div>
-        <div style="text-align:center;margin-top:.75rem;font-size:.72rem;color:var(--muted);">
-          Ya tienes cuenta? <a onclick="bizTab('login')" style="color:var(--accent);cursor:pointer;">Inicia sesion</a>
-        </div>
+        <div class="center-sm" style="margin-top:.75rem;">Ya tienes cuenta? <span class="link-text" onclick="bizTab('login')">Inicia sesion</span></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal-overlay" id="modalClient" onclick="handleOverlay(event,'modalClient')">
+<!-- MODAL CLIENTE -->
+<div class="overlay" id="ovClient" onclick="closeIfBg(event,'ovClient')">
   <div class="modal">
-    <div class="modal-hdr">
-      <div class="modal-title">EXPLORAR CIUDAD</div>
-      <button class="modal-close" onclick="closeModal('modalClient')">X</button>
+    <div class="modal-head">
+      <h2>EXPLORAR CIUDAD</h2>
+      <button class="btn-close" onclick="closeModal('ovClient')">&#x2715;</button>
     </div>
     <div class="modal-body">
-      <div class="auth-tabs">
-        <button class="auth-tab active" id="tabCL" onclick="clientTab('login')">Entrar</button>
-        <button class="auth-tab" id="tabCR" onclick="clientTab('register')">Registrarme</button>
+      <div class="tabs">
+        <button class="tab on" id="tCL" onclick="clientTab('login')">Entrar</button>
+        <button class="tab" id="tCR" onclick="clientTab('register')">Registrarme</button>
       </div>
-      <div id="pClientLogin">
-        <div class="form-group">
-          <label class="form-label">Tu email</label>
-          <input class="form-input" id="clientEmail" type="email" placeholder="tu@email.com" onkeydown="if(event.key==='Enter')doClientLogin()">
+      <div id="pCL">
+        <div class="field">
+          <label>Tu email</label>
+          <input type="email" id="cEmail" placeholder="tu@email.com">
         </div>
         <button class="btn-submit" onclick="doClientLogin()">Explorar negocios</button>
       </div>
-      <div id="pClientRegister" style="display:none;">
-        <div class="form-group">
-          <label class="form-label">Nombre</label>
-          <input class="form-input" type="text" placeholder="Tu nombre">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="tu@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Ciudad</label>
-          <input class="form-input" type="text" placeholder="En que ciudad estas?">
-        </div>
-        <button class="btn-submit" onclick="doClientRegister()">Crear cuenta gratis</button>
+      <div id="pCR" style="display:none;">
+        <div class="field"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="tu@email.com"></div>
+        <div class="field"><label>Ciudad</label><input type="text" placeholder="Tu ciudad"></div>
+        <button class="btn-submit" onclick="doClientReg()">Crear cuenta gratis</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="orb o1"></div>
   <div class="orb o2"></div>
-  <div class="orb o3"></div>
-  <div class="hero-pill">Ciudad digital - Reservas - Comunidad</div>
+  <div class="pill">Ciudad digital - Reservas - Comunidad</div>
   <h1>NUBEXA</h1>
-  <div class="hero-tag">Tu Ciudad Digital</div>
+  <div class="hero-sub">Tu Ciudad Digital</div>
   <p>Descubre negocios increibles, reserva servicios y conecta con tu comunidad en el mapa digital de tu ciudad.</p>
   <div class="hero-btns">
-    <button class="btn-lg btn-primary" onclick="openModal('biz');bizTab('register')">Unir mi negocio gratis</button>
-    <button class="btn-lg btn-outline" onclick="openModal('client')">Explorar la ciudad</button>
+    <button class="btn-lg btn-primary" onclick="showModal('biz','register')">Unir mi negocio gratis</button>
+    <button class="btn-lg btn-outline" onclick="showModal('client','login')">Explorar la ciudad</button>
   </div>
 </section>
 
-<div class="skyline-wrap">
+<!-- SKYLINE -->
+<div class="skyline">
   <svg viewBox="0 0 1440 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="gl" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="transparent"/>
-        <stop offset="20%" stop-color="#00f0ff" stop-opacity=".6"/>
-        <stop offset="50%" stop-color="#7b2fff" stop-opacity=".8"/>
-        <stop offset="80%" stop-color="#00f0ff" stop-opacity=".6"/>
-        <stop offset="100%" stop-color="transparent"/>
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="20%" stop-color="#00f0ff" stop-opacity=".6"/><stop offset="50%" stop-color="#7b2fff" stop-opacity=".8"/><stop offset="80%" stop-color="#00f0ff" stop-opacity=".6"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs>
     <line x1="0" y1="218" x2="1440" y2="218" stroke="url(#gl)" stroke-width="1.5"/>
     <rect x="80" y="90" width="50" height="130" fill="#0a1128" stroke="rgba(123,47,255,.2)" stroke-width=".8"/>
     <rect x="145" y="120" width="90" height="100" fill="#0a1128" stroke="rgba(0,240,255,.12)" stroke-width=".8"/>
@@ -339,338 +342,209 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2.
     <rect x="820" y="65" width="75" height="155" fill="#0a1128" stroke="rgba(0,240,255,.18)" stroke-width=".8"/>
     <rect x="1015" y="55" width="80" height="165" fill="#0a1128" stroke="rgba(0,240,255,.2)" stroke-width=".8"/>
     <rect x="1195" y="80" width="90" height="140" fill="#0a1128" stroke="rgba(123,47,255,.18)" stroke-width=".8"/>
-    <rect x="265" y="75" width="8" height="6" fill="rgba(0,240,255,.5)"/>
     <rect x="625" y="62" width="10" height="7" fill="rgba(123,47,255,.6)"/>
+    <rect x="265" y="75" width="8" height="6" fill="rgba(0,240,255,.5)"/>
     <rect x="1030" y="72" width="10" height="7" fill="rgba(0,240,255,.5)"/>
   </svg>
 </div>
 
+<!-- STATS -->
 <div class="stats">
-  <div class="stat"><div class="stat-num">10K+</div><div class="stat-lbl">Negocios</div></div>
-  <div class="stat"><div class="stat-num">500K+</div><div class="stat-lbl">Usuarios</div></div>
-  <div class="stat"><div class="stat-num">50+</div><div class="stat-lbl">Categorias</div></div>
-  <div class="stat"><div class="stat-num">24</div><div class="stat-lbl">Ciudades</div></div>
+  <div class="stat"><div class="stat-n">10K+</div><div class="stat-l">Negocios</div></div>
+  <div class="stat"><div class="stat-n">500K+</div><div class="stat-l">Usuarios</div></div>
+  <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Categorias</div></div>
+  <div class="stat"><div class="stat-n">24</div><div class="stat-l">Ciudades</div></div>
 </div>
 
-<div class="section" id="how">
-  <div class="section-label">// Proceso</div>
-  <h2 class="section-title">Como funciona NUBEXA?</h2>
-  <p class="section-sub">Tres pasos para conectar tu negocio con miles de clientes.</p>
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">01</div>
-      <div class="step-ico">🏗️</div>
-      <div class="step-title">Registra tu negocio</div>
-      <div class="step-body">Crea tu perfil en minutos con fotos, servicios y precios. Sin conocimiento tecnico.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">02</div>
-      <div class="step-ico">🌆</div>
-      <div class="step-title">Aparece en el mapa</div>
-      <div class="step-body">Tu negocio queda visible en el mapa digital. Los clientes te encuentran por categoria o busqueda.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">03</div>
-      <div class="step-ico">📅</div>
-      <div class="step-title">Recibe reservas</div>
-      <div class="step-body">Los clientes reservan citas directamente desde tu perfil. Recibes notificacion inmediata.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-num">04</div>
-      <div class="step-ico">📈</div>
-      <div class="step-title">Crece con datos</div>
-      <div class="step-body">Ve metricas reales: visitas, reservas, resenas. IA que te ayuda a llegar a mas clientes.</div>
-    </div>
+<!-- HOW -->
+<div class="sec" id="how">
+  <div class="sec-lbl">// Proceso</div>
+  <h2 class="sec-title">Como funciona NUBEXA?</h2>
+  <p class="sec-sub">Cuatro pasos para conectar tu negocio con miles de clientes en tu ciudad.</p>
+  <div class="grid4">
+    <div class="card"><div class="card-num">01</div><div class="card-ico">🏗️</div><div class="card-title">Registra tu negocio</div><div class="card-body">Crea tu perfil en minutos con fotos, servicios y precios. Sin conocimiento tecnico.</div></div>
+    <div class="card"><div class="card-num">02</div><div class="card-ico">🌆</div><div class="card-title">Aparece en el mapa</div><div class="card-body">Tu negocio queda visible en el mapa digital. Los clientes te encuentran por categoria o busqueda.</div></div>
+    <div class="card"><div class="card-num">03</div><div class="card-ico">📅</div><div class="card-title">Recibe reservas</div><div class="card-body">Los clientes reservan citas directamente desde tu perfil. Recibes notificacion inmediata.</div></div>
+    <div class="card"><div class="card-num">04</div><div class="card-ico">📈</div><div class="card-title">Crece con datos</div><div class="card-body">Ve metricas reales: visitas, reservas, resenas. IA que te ayuda a llegar a mas clientes.</div></div>
   </div>
 </div>
 
-<div class="section" id="features">
-  <div class="features-grid">
+<!-- FEATURES -->
+<div class="sec" id="features">
+  <div class="feat-grid">
     <div>
-      <div class="section-label">// Funcionalidades</div>
-      <h2 class="section-title">Una plataforma, dos mundos</h2>
+      <div class="sec-lbl">// Funcionalidades</div>
+      <h2 class="sec-title">Una plataforma, dos mundos</h2>
       <div class="feat-list">
-        <div class="feat-item">
-          <div class="feat-ico">📊</div>
-          <div>
-            <div class="feat-title">Dashboard de crecimiento</div>
-            <div class="feat-body">Ve en tiempo real cuantas personas visitaron tu perfil y que servicios interesan mas.</div>
-          </div>
-        </div>
-        <div class="feat-item">
-          <div class="feat-ico">💬</div>
-          <div>
-            <div class="feat-title">Chat directo con clientes</div>
-            <div class="feat-body">Comunicacion instantanea. Resuelve dudas y confirma citas desde la app.</div>
-          </div>
-        </div>
-        <div class="feat-item">
-          <div class="feat-ico">🤖</div>
-          <div>
-            <div class="feat-title">IA para crecer</div>
-            <div class="feat-body">Recomendaciones personalizadas y predicciones de demanda basadas en tus datos reales.</div>
-          </div>
-        </div>
-        <div class="feat-item">
-          <div class="feat-ico">🌍</div>
-          <div>
-            <div class="feat-title">Presencia global</div>
-            <div class="feat-body">NUBEXA esta en multiples ciudades. Tu negocio accede a clientes de todo el mundo.</div>
-          </div>
-        </div>
+        <div class="feat"><div class="feat-ico">📊</div><div><div class="feat-title">Dashboard de crecimiento</div><div class="feat-body">Ve en tiempo real cuantas personas visitaron tu perfil y que servicios interesan mas.</div></div></div>
+        <div class="feat"><div class="feat-ico">💬</div><div><div class="feat-title">Chat directo con clientes</div><div class="feat-body">Comunicacion instantanea. Resuelve dudas y confirma citas desde la app.</div></div></div>
+        <div class="feat"><div class="feat-ico">🤖</div><div><div class="feat-title">IA para crecer</div><div class="feat-body">Recomendaciones personalizadas y predicciones de demanda basadas en tus datos.</div></div></div>
+        <div class="feat"><div class="feat-ico">🌍</div><div><div class="feat-title">Presencia global</div><div class="feat-body">NUBEXA esta en multiples ciudades. Tu negocio accede a clientes de todo el mundo.</div></div></div>
       </div>
     </div>
     <div>
-      <div class="phone-mock">
-        <div class="pm-bar">
-          <div class="pm-dot" style="background:#ff5f57;"></div>
-          <div class="pm-dot" style="background:#ffbd2e;"></div>
-          <div class="pm-dot" style="background:#28c840;"></div>
-        </div>
-        <div class="pm-search">Buscar en NUBEXA...</div>
-        <div class="pm-cats">
-          <div class="pm-cat active">Todos</div>
-          <div class="pm-cat">Belleza</div>
-          <div class="pm-cat">Comida</div>
-          <div class="pm-cat">Salud</div>
-        </div>
-        <div class="pm-card">
-          <span style="font-size:1.2rem;margin-right:.4rem;">✂️</span>
-          <div><div class="pm-card-name">GlowUp Studio</div><div class="pm-card-meta">5 estrellas - 178 resenas</div></div>
-        </div>
-        <div class="pm-card">
-          <span style="font-size:1.2rem;margin-right:.4rem;">☕</span>
-          <div><div class="pm-card-name">Cafe Nube</div><div class="pm-card-meta">5 estrellas - 128 resenas</div></div>
-        </div>
-        <div class="pm-card">
-          <span style="font-size:1.2rem;margin-right:.4rem;">💆</span>
-          <div><div class="pm-card-name">Zen Studio</div><div class="pm-card-meta">5 estrellas - 210 resenas</div></div>
-        </div>
+      <div class="phone">
+        <div class="phone-bar"><div class="phone-dot" style="background:#ff5f57;"></div><div class="phone-dot" style="background:#ffbd2e;"></div><div class="phone-dot" style="background:#28c840;"></div></div>
+        <div class="phone-search">Buscar en NUBEXA...</div>
+        <div class="phone-cats"><div class="phone-cat on">Todos</div><div class="phone-cat">Belleza</div><div class="phone-cat">Comida</div><div class="phone-cat">Salud</div></div>
+        <div class="phone-item"><span style="font-size:1.1rem;margin-right:.4rem;">✂️</span><div><div class="phone-name">GlowUp Studio</div><div class="phone-meta">5 estrellas - 178 resenas</div></div></div>
+        <div class="phone-item"><span style="font-size:1.1rem;margin-right:.4rem;">☕</span><div><div class="phone-name">Cafe Nube</div><div class="phone-meta">5 estrellas - 128 resenas</div></div></div>
+        <div class="phone-item"><span style="font-size:1.1rem;margin-right:.4rem;">💆</span><div><div class="phone-name">Zen Studio</div><div class="phone-meta">5 estrellas - 210 resenas</div></div></div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="section" id="pricing">
-  <div style="text-align:center;max-width:600px;margin:0 auto 3rem;">
-    <div class="section-label">// Planes</div>
-    <h2 class="section-title">Precios para crecer</h2>
-    <p class="section-sub" style="margin:0 auto;">El primer mes es gratis para negocios fundadores. Sin tarjeta requerida.</p>
+<!-- PRICING -->
+<div class="sec" id="pricing">
+  <div style="text-align:center;max-width:580px;margin:0 auto 3rem;">
+    <div class="sec-lbl">// Planes</div>
+    <h2 class="sec-title">Precios para crecer</h2>
+    <p class="sec-sub" style="margin:0 auto;">El primer mes es gratis para negocios fundadores. Sin tarjeta requerida.</p>
   </div>
-  <div class="pricing-grid">
-    <div class="price-card">
-      <div class="price-tier">EXPLORADOR</div>
-      <div class="price-amount" style="color:var(--accent);">$0</div>
-      <div class="price-period">/ para siempre</div>
-      <ul class="price-features">
-        <li>Perfil basico en el mapa</li>
-        <li>Hasta 5 fotos del negocio</li>
-        <li>Recibe resenas de clientes</li>
-        <li>Estadisticas basicas</li>
-      </ul>
-      <button class="price-btn" onclick="openModal('biz');bizTab('register')">Empezar gratis</button>
+  <div class="pgrid">
+    <div class="pcard">
+      <div class="ptier">EXPLORADOR</div>
+      <div class="pprice" style="color:var(--accent);">$0</div>
+      <div class="pperiod">/ para siempre</div>
+      <ul class="pfeats"><li>Perfil basico en el mapa</li><li>Hasta 5 fotos del negocio</li><li>Recibe resenas de clientes</li><li>Estadisticas basicas</li></ul>
+      <button class="pbtn" onclick="showModal('biz','register')">Empezar gratis</button>
     </div>
-    <div class="price-card featured">
-      <div class="price-tier">EMPRENDEDOR</div>
-      <div class="price-amount" style="color:var(--gold);">$29</div>
-      <div class="price-period">/ mes - primer mes gratis</div>
-      <ul class="price-features">
-        <li>Todo lo del Explorador</li>
-        <li>Destacado en el mapa</li>
-        <li>Fotos y catalogo ilimitado</li>
-        <li>Dashboard avanzado</li>
-        <li>Sistema de reservas</li>
-        <li>Chat directo con clientes</li>
-        <li>Herramientas de marketing</li>
-        <li>Soporte prioritario</li>
-      </ul>
-      <button class="price-btn" onclick="openModal('biz');bizTab('register')">Empezar con mes gratis</button>
+    <div class="pcard featured">
+      <div class="ptier">EMPRENDEDOR</div>
+      <div class="pprice" style="color:var(--gold);">$29</div>
+      <div class="pperiod">/ mes - primer mes gratis</div>
+      <ul class="pfeats"><li>Todo lo del Explorador</li><li>Destacado en el mapa</li><li>Fotos y catalogo ilimitado</li><li>Dashboard avanzado</li><li>Sistema de reservas</li><li>Chat directo con clientes</li><li>Herramientas de marketing</li><li>Soporte prioritario</li></ul>
+      <button class="pbtn" onclick="showModal('biz','register')">Empezar con mes gratis</button>
     </div>
-    <div class="price-card">
-      <div class="price-tier">EMPRESARIAL</div>
-      <div class="price-amount" style="color:var(--a2);">$79</div>
-      <div class="price-period">/ mes - multiples sedes</div>
-      <ul class="price-features">
-        <li>Todo lo del Emprendedor</li>
-        <li>Hasta 5 sedes</li>
-        <li>Posicion premium</li>
-        <li>IA avanzada</li>
-        <li>Gerente de cuenta dedicado</li>
-        <li>Badge verificado</li>
-      </ul>
-      <button class="price-btn" onclick="window.open('https://buy.stripe.com/28EcN51UBd5gbMzaBDefC00','_blank')">Contactar ventas</button>
+    <div class="pcard">
+      <div class="ptier">EMPRESARIAL</div>
+      <div class="pprice" style="color:var(--a2);">$79</div>
+      <div class="pperiod">/ mes - multiples sedes</div>
+      <ul class="pfeats"><li>Todo lo del Emprendedor</li><li>Hasta 5 sedes</li><li>Posicion premium</li><li>IA avanzada</li><li>Gerente de cuenta dedicado</li><li>Badge verificado</li></ul>
+      <button class="pbtn" onclick="window.open('https://buy.stripe.com/28EcN51UBd5gbMzaBDefC00','_blank')">Contactar ventas</button>
     </div>
   </div>
 </div>
 
-<div class="cta-section">
-  <div class="hero-pill" style="margin-bottom:1.5rem;display:inline-flex;">El futuro del comercio local es digital</div>
+<!-- CTA -->
+<div class="cta">
+  <div class="pill" style="margin-bottom:1.5rem;display:inline-flex;">El futuro del comercio local es digital</div>
   <h2>Tu ciudad te esta esperando</h2>
   <p>Unete a miles de emprendedores construyendo su presencia digital en NUBEXA.</p>
-  <div class="hero-btns" style="animation:none;opacity:1;">
-    <button class="btn-lg btn-primary" onclick="openModal('biz');bizTab('register')">Registrar mi negocio</button>
-    <button class="btn-lg btn-outline" onclick="openModal('client')">Explorar como cliente</button>
+  <div class="hero-btns">
+    <button class="btn-lg btn-primary" onclick="showModal('biz','register')">Registrar mi negocio</button>
+    <button class="btn-lg btn-outline" onclick="showModal('client','login')">Explorar como cliente</button>
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-  <button class="logo" onclick="window.scrollTo(0,0)" style="background:transparent;border:none;">NUBEXA</button>
-  <ul class="footer-links">
+  <button class="logo" onclick="window.scrollTo(0,0)" style="border:none;background:transparent;">NUBEXA</button>
+  <ul class="flinks">
     <li><a onclick="toast('Terminos de servicio')">Terminos</a></li>
     <li><a onclick="toast('Politica de privacidad')">Privacidad</a></li>
-    <li><a href="/cdn-cgi/l/email-protection#51393e3d30113f24333429307f32382528">Contacto</a></li>
+    <li><a href="mailto:hola@nubexa.city">Contacto</a></li>
   </ul>
   <p style="font-size:.7rem;color:var(--muted);">2025 NUBEXA - Todos los derechos reservados</p>
 </footer>
 
 <div class="toast" id="toastEl"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-var TALLY_URL = 'https://tally.so/embed/J9DM2z?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
-var STRIPE_URL = 'https://buy.stripe.com/28EcN51UBd5gbMzaBDefC00';
-var tallyFrameLoaded = false;
+<script>
+var STRIPE = 'https://buy.stripe.com/28EcN51UBd5gbMzaBDefC00';
 
-function submitRegister() {
-  var biz = document.getElementById('reg_biz').value.trim();
-  var name = document.getElementById('reg_name').value.trim();
-  var email = document.getElementById('reg_email').value.trim();
-  var phone = document.getElementById('reg_phone').value.trim();
-  var city = document.getElementById('reg_city').value.trim();
-  var cat = document.getElementById('reg_cat').value;
-  var desc = document.getElementById('reg_desc').value.trim();
-
-  if (!biz || !name || !email || !city) {
-    toast('Completa los campos obligatorios');
-    return;
-  }
-  if (!email.includes('@')) {
-    toast('Escribe un email valido');
-    return;
-  }
-
-  var btn = document.querySelector('#nubexaForm .btn-submit');
-  btn.textContent = 'Registrando...';
-  btn.disabled = true;
-
-  var data = 'Negocio: ' + biz + ' | Dueno: ' + name + ' | Email: ' + email +
-    ' | Tel: ' + phone + ' | Ciudad: ' + city + ' | Cat: ' + cat + ' | Desc: ' + desc;
-
-  fetch('https://tally.so/r/J9DM2z', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ negocio: biz, nombre: name, email: email, telefono: phone, ciudad: city, categoria: cat, descripcion: desc })
-  }).catch(function() {});
-
-  setTimeout(function() {
-    document.getElementById('nubexaForm').style.display = 'none';
-    document.getElementById('regSuccess').style.display = 'block';
-  }, 1000);
-}
-
-function openModal(type) {
-  closeAllModals();
-  var id = type === 'biz' ? 'modalBiz' : 'modalClient';
-  document.getElementById(id).classList.add('active');
+function showModal(which, tab) {
+  var id = which === 'biz' ? 'ovBiz' : 'ovClient';
+  document.getElementById(id).style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  if (which === 'biz') bizTab(tab);
+  if (which === 'client') clientTab(tab);
 }
 
 function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
+  document.getElementById(id).style.display = 'none';
   document.body.style.overflow = '';
 }
 
-function closeAllModals() {
-  document.querySelectorAll('.modal-overlay').forEach(function(m) {
-    m.classList.remove('active');
-  });
-  document.body.style.overflow = '';
-}
-
-function handleOverlay(e, id) {
+function closeIfBg(e, id) {
   if (e.target === document.getElementById(id)) closeModal(id);
 }
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeAllModals();
+  if (e.key === 'Escape') {
+    closeModal('ovBiz');
+    closeModal('ovClient');
+  }
 });
 
 function bizTab(tab) {
-  document.getElementById('tabL').classList.toggle('active', tab === 'login');
-  document.getElementById('tabR').classList.toggle('active', tab === 'register');
-  document.getElementById('pLogin').style.display = tab === 'login' ? 'block' : 'none';
-  document.getElementById('pRegister').style.display = tab === 'register' ? 'block' : 'none';
-  document.getElementById('bizTitle').textContent = tab === 'login' ? 'ACCESO NEGOCIO' : 'UNIR MI NEGOCIO';
-  if (tab === 'register') {
-    document.getElementById('nubexaForm').style.display = 'block';
-    document.getElementById('regSuccess').style.display = 'none';
-  }
-}
-
-function tallyLoaded() {
-  document.getElementById('tallyLoading').style.display = 'none';
-  document.getElementById('tallyFrame').style.display = 'block';
+  var isLogin = tab === 'login';
+  document.getElementById('tLogin').className = 'tab' + (isLogin ? ' on' : '');
+  document.getElementById('tReg').className = 'tab' + (!isLogin ? ' on' : '');
+  document.getElementById('panelLogin').style.display = isLogin ? 'block' : 'none';
+  document.getElementById('panelReg').style.display = !isLogin ? 'block' : 'none';
+  document.getElementById('bizTitle').textContent = isLogin ? 'ACCESO NEGOCIO' : 'UNIR MI NEGOCIO';
 }
 
 function clientTab(tab) {
-  document.getElementById('tabCL').classList.toggle('active', tab === 'login');
-  document.getElementById('tabCR').classList.toggle('active', tab === 'register');
-  document.getElementById('pClientLogin').style.display = tab === 'login' ? 'block' : 'none';
-  document.getElementById('pClientRegister').style.display = tab === 'register' ? 'block' : 'none';
+  var isLogin = tab === 'login';
+  document.getElementById('tCL').className = 'tab' + (isLogin ? ' on' : '');
+  document.getElementById('tCR').className = 'tab' + (!isLogin ? ' on' : '');
+  document.getElementById('pCL').style.display = isLogin ? 'block' : 'none';
+  document.getElementById('pCR').style.display = !isLogin ? 'block' : 'none';
 }
 
 function doLogin() {
   var email = document.getElementById('loginEmail').value.trim();
-  if (!email || !email.includes('@')) {
-    toast('Escribe un email valido');
-    return;
-  }
+  if (!email || email.indexOf('@') < 0) { toast('Escribe un email valido'); return; }
   var btn = document.getElementById('loginBtn');
   btn.textContent = 'Verificando...';
   btn.disabled = true;
   setTimeout(function() {
     btn.textContent = 'Entrar a mi negocio';
     btn.disabled = false;
-    showLoginSuccess(email);
+    document.getElementById('bizTitle').textContent = 'BIENVENIDO/A!';
+    document.getElementById('panelLogin').innerHTML =
+      '<div class="success-box">' +
+      '<span class="ico">🏙️</span>' +
+      '<h3>ACCESO CONFIRMADO</h3>' +
+      '<p>Encontramos tu cuenta <strong>' + email + '</strong>. Te redirigimos a tu dashboard.</p>' +
+      '<div class="next-steps">' +
+      '<div class="ns-lbl">EN TU DASHBOARD</div>' +
+      '<div class="ns-item">Ver tu perfil en el mapa</div>' +
+      '<div class="ns-item">Gestionar reservas y clientes</div>' +
+      '<div class="ns-item">Ver metricas e insights de IA</div>' +
+      '</div>' +
+      '<button class="btn-submit" onclick="window.open(\'' + STRIPE + '\',\'_blank\')">Ir a mi dashboard</button>' +
+      '</div>';
   }, 1200);
 }
 
-function showLoginSuccess(email) {
-  document.getElementById('bizTitle').textContent = 'BIENVENIDO/A!';
-  document.getElementById('bizBody').innerHTML =
-    '<div class="success-state">' +
-    '<span class="ss-ico">🏙️</span>' +
-    '<div class="ss-title">ACCESO CONFIRMADO</div>' +
-    '<div class="ss-msg">Encontramos tu cuenta <strong>' + email + '</strong>. Te redirigimos a tu dashboard.</div>' +
-    '<div class="ss-next">' +
-    '<div class="sn-label">EN TU DASHBOARD PUEDES</div>' +
-    '<div class="sn-item">Ver tu perfil en el mapa de la ciudad</div>' +
-    '<div class="sn-item">Gestionar reservas y clientes</div>' +
-    '<div class="sn-item">Ver metricas e insights de IA</div>' +
-    '<div class="sn-item">Configurar servicios y precios</div>' +
-    '</div>' +
-    '<button class="btn-submit" onclick="window.open(\'' + STRIPE_URL + '\',\'_blank\');closeAllModals();">Ir a mi dashboard</button>' +
-    '<div style="margin-top:.75rem;font-size:.7rem;color:var(--muted);">Problemas? Escribenos a <a href="mailto:hola@nubexa.city" style="color:var(--accent);">hola@nubexa.city</a></div>' +
-    '</div>';
+function doRegister() {
+  var biz = document.getElementById('rBiz').value.trim();
+  var name = document.getElementById('rName').value.trim();
+  var email = document.getElementById('rEmail').value.trim();
+  var city = document.getElementById('rCity').value.trim();
+  if (!biz || !name || !email || !city) { toast('Completa los campos obligatorios'); return; }
+  if (email.indexOf('@') < 0) { toast('Escribe un email valido'); return; }
+  document.getElementById('regForm').style.display = 'none';
+  document.getElementById('regOk').style.display = 'block';
 }
 
 function doClientLogin() {
-  var emailEl = document.getElementById('clientEmail');
-  var email = emailEl ? emailEl.value.trim() : '';
-  if (!email || !email.includes('@')) {
-    toast('Escribe un email valido');
-    return;
-  }
+  var email = document.getElementById('cEmail').value.trim();
+  if (!email || email.indexOf('@') < 0) { toast('Escribe un email valido'); return; }
   toast('Bienvenido/a a NUBEXA!');
-  setTimeout(closeAllModals, 1500);
+  setTimeout(function() { closeModal('ovClient'); }, 1500);
 }
 
-function doClientRegister() {
+function doClientReg() {
   toast('Cuenta creada! Explora la ciudad');
-  setTimeout(closeAllModals, 1500);
+  setTimeout(function() { closeModal('ovClient'); }, 1500);
 }
 
-function scrollSec(id) {
+function goTo(id) {
   var el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
@@ -678,4 +552,10 @@ function scrollSec(id) {
 function toast(msg) {
   var t = document.getElementById('toastEl');
   t.textContent = msg;
- 
+  t.className = 'toast show';
+  clearTimeout(t._t);
+  t._t = setTimeout(function() { t.className = 'toast'; }, 2800);
+}
+</script>
+</body>
+</html>
