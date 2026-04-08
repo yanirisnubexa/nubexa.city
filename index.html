@@ -444,14 +444,14 @@ footer{border-top:1px solid var(--border);padding:2.5rem 2rem;display:flex;justi
   <ul class="flinks">
     <li><a onclick="toast('Terminos de servicio')">Terminos</a></li>
     <li><a onclick="toast('Politica de privacidad')">Privacidad</a></li>
-    <li><a href="mailto:hola@nubexa.city">Contacto</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#b3dbdcdfd2f3ddc6d1d6cbd29dd0dac7ca">Contacto</a></li>
   </ul>
   <p style="font-size:.7rem;color:var(--muted);">2025 NUBEXA - Todos los derechos reservados</p>
 </footer>
 
 <div class="toast" id="toastEl"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var STRIPE = 'https://buy.stripe.com/28EcN51UBd5gbMzaBDefC00';
 
 function showModal(which, tab) {
@@ -525,11 +525,40 @@ function doRegister() {
   var biz = document.getElementById('rBiz').value.trim();
   var name = document.getElementById('rName').value.trim();
   var email = document.getElementById('rEmail').value.trim();
+  var phone = document.getElementById('rPhone').value.trim();
   var city = document.getElementById('rCity').value.trim();
+  var cat = document.getElementById('rCat').value;
+  var desc = document.getElementById('rDesc').value.trim();
+
   if (!biz || !name || !email || !city) { toast('Completa los campos obligatorios'); return; }
   if (email.indexOf('@') < 0) { toast('Escribe un email valido'); return; }
-  document.getElementById('regForm').style.display = 'none';
-  document.getElementById('regOk').style.display = 'block';
+
+  var btn = document.querySelector('#regForm .btn-submit');
+  btn.textContent = 'Registrando...';
+  btn.disabled = true;
+
+  fetch('https://hook.us2.make.com/izvnht6tq11e2mud02hsrse7rgv91sfr', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      negocio: biz,
+      nombre: name,
+      email: email,
+      telefono: phone,
+      ciudad: city,
+      categoria: cat,
+      descripcion: desc,
+      fecha: new Date().toLocaleDateString('es-ES')
+    })
+  })
+  .then(function() {
+    document.getElementById('regForm').style.display = 'none';
+    document.getElementById('regOk').style.display = 'block';
+  })
+  .catch(function() {
+    document.getElementById('regForm').style.display = 'none';
+    document.getElementById('regOk').style.display = 'block';
+  });
 }
 
 function doClientLogin() {
@@ -552,10 +581,3 @@ function goTo(id) {
 function toast(msg) {
   var t = document.getElementById('toastEl');
   t.textContent = msg;
-  t.className = 'toast show';
-  clearTimeout(t._t);
-  t._t = setTimeout(function() { t.className = 'toast'; }, 2800);
-}
-</script>
-</body>
-</html>
