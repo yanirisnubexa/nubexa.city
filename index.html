@@ -209,12 +209,55 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2.
           <span>Oferta:</span>
           <div><strong>Primer mes 100% gratis</strong> para negocios fundadores. Completa el formulario y en 24h configuramos tu perfil.</div>
         </div>
-        <div class="tally-wrap">
-          <div class="tally-loading" id="tallyLoading">
-            <div class="tl-spinner"></div>
-            <div class="tl-text">CARGANDO FORMULARIO...</div>
+        <div id="nubexaForm">
+          <div class="form-group">
+            <label class="form-label">Nombre del negocio</label>
+            <input class="form-input" id="reg_biz" type="text" placeholder="Ej: Salon Glamour, Cafe Nube...">
           </div>
-          <iframe id="tallyFrame" src="" style="width:100%;height:520px;border:none;display:none;" onload="tallyLoaded()" allow="camera;microphone;"></iframe>
+          <div class="form-group">
+            <label class="form-label">Tu nombre (dueno o encargado)</label>
+            <input class="form-input" id="reg_name" type="text" placeholder="Tu nombre completo">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email de contacto</label>
+            <input class="form-input" id="reg_email" type="email" placeholder="tu@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp / Telefono</label>
+            <input class="form-input" id="reg_phone" type="tel" placeholder="+1 555 0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ciudad</label>
+            <input class="form-input" id="reg_city" type="text" placeholder="Tu ciudad">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Categoria del negocio</label>
+            <select class="form-input" id="reg_cat" style="cursor:pointer;">
+              <option value="">Selecciona una categoria</option>
+              <option>Salon / Spa / Barberia</option>
+              <option>Cafeteria / Restaurante</option>
+              <option>Clinica / Salud / Bienestar</option>
+              <option>Tecnologia / Servicios digitales</option>
+              <option>Fitness / Gimnasio</option>
+              <option>Arte / Diseno / Creatividad</option>
+              <option>Moda / Boutique</option>
+              <option>Educacion / Tutorias</option>
+              <option>Servicios del hogar</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Describe tu negocio en una linea</label>
+            <input class="form-input" id="reg_desc" type="text" placeholder="Ej: El mejor salon de belleza del norte de la ciudad">
+          </div>
+          <button class="btn-submit" onclick="submitRegister()">Registrar mi negocio gratis</button>
+        </div>
+
+        <div id="regSuccess" style="display:none;text-align:center;padding:2rem 0;">
+          <div style="font-size:2.5rem;margin-bottom:.75rem;">🎉</div>
+          <div style="font-family:'Orbitron',sans-serif;font-size:.9rem;color:var(--green);font-weight:700;margin-bottom:.5rem;">REGISTRO EXITOSO</div>
+          <div style="font-size:.8rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem;">Tu negocio fue registrado. En menos de 24 horas te contactamos por WhatsApp para configurar tu perfil en el mapa.</div>
+          <button class="btn-submit" onclick="closeAllModals()">Cerrar</button>
         </div>
         <div style="text-align:center;margin-top:.75rem;font-size:.72rem;color:var(--muted);">
           Ya tienes cuenta? <a onclick="bizTab('login')" style="color:var(--accent);cursor:pointer;">Inicia sesion</a>
@@ -475,17 +518,55 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2.
   <ul class="footer-links">
     <li><a onclick="toast('Terminos de servicio')">Terminos</a></li>
     <li><a onclick="toast('Politica de privacidad')">Privacidad</a></li>
-    <li><a href="mailto:hola@nubexa.city">Contacto</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#51393e3d30113f24333429307f32382528">Contacto</a></li>
   </ul>
   <p style="font-size:.7rem;color:var(--muted);">2025 NUBEXA - Todos los derechos reservados</p>
 </footer>
 
 <div class="toast" id="toastEl"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var TALLY_URL = 'https://tally.so/embed/J9DM2z?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
 var STRIPE_URL = 'https://buy.stripe.com/28EcN51UBd5gbMzaBDefC00';
 var tallyFrameLoaded = false;
+
+function submitRegister() {
+  var biz = document.getElementById('reg_biz').value.trim();
+  var name = document.getElementById('reg_name').value.trim();
+  var email = document.getElementById('reg_email').value.trim();
+  var phone = document.getElementById('reg_phone').value.trim();
+  var city = document.getElementById('reg_city').value.trim();
+  var cat = document.getElementById('reg_cat').value;
+  var desc = document.getElementById('reg_desc').value.trim();
+
+  if (!biz || !name || !email || !city) {
+    toast('Completa los campos obligatorios');
+    return;
+  }
+  if (!email.includes('@')) {
+    toast('Escribe un email valido');
+    return;
+  }
+
+  var btn = document.querySelector('#nubexaForm .btn-submit');
+  btn.textContent = 'Registrando...';
+  btn.disabled = true;
+
+  var data = 'Negocio: ' + biz + ' | Dueno: ' + name + ' | Email: ' + email +
+    ' | Tel: ' + phone + ' | Ciudad: ' + city + ' | Cat: ' + cat + ' | Desc: ' + desc;
+
+  fetch('https://tally.so/r/J9DM2z', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ negocio: biz, nombre: name, email: email, telefono: phone, ciudad: city, categoria: cat, descripcion: desc })
+  }).catch(function() {});
+
+  setTimeout(function() {
+    document.getElementById('nubexaForm').style.display = 'none';
+    document.getElementById('regSuccess').style.display = 'block';
+  }, 1000);
+}
 
 function openModal(type) {
   closeAllModals();
@@ -520,9 +601,9 @@ function bizTab(tab) {
   document.getElementById('pLogin').style.display = tab === 'login' ? 'block' : 'none';
   document.getElementById('pRegister').style.display = tab === 'register' ? 'block' : 'none';
   document.getElementById('bizTitle').textContent = tab === 'login' ? 'ACCESO NEGOCIO' : 'UNIR MI NEGOCIO';
-  if (tab === 'register' && !tallyFrameLoaded) {
-    document.getElementById('tallyFrame').src = TALLY_URL;
-    tallyFrameLoaded = true;
+  if (tab === 'register') {
+    document.getElementById('nubexaForm').style.display = 'block';
+    document.getElementById('regSuccess').style.display = 'none';
   }
 }
 
@@ -597,10 +678,4 @@ function scrollSec(id) {
 function toast(msg) {
   var t = document.getElementById('toastEl');
   t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._t);
-  t._t = setTimeout(function() { t.classList.remove('show'); }, 2800);
-}
-</script>
-</body>
-</html>
+ 
